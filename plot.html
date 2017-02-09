@@ -3,36 +3,37 @@
     <meta charset="utf-8">
     <title>Highest Level of Education Attained Vs Income with Regression Line</title>
     <style>
-      .line {
-          stroke: #E4002B;
-          fill: none;
-          stroke-width: 3;
-      }
+.line {
+    stroke: #E4002B;
+    fill: none;
+    stroke-width: 3;
+}
 
-      .axis path,
-      .axis line {
-          fill: none;
-          stroke: black;
-          shape-rendering: crispEdges;
-      }
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
 
-      .axis text {
-          font-size: 10px;
-          font-family: sans-serif;
-      }
+.axis text {
+    font-size: 10px;
+    font-family: sans-serif;
+}
 
-      .text-label {
-          font-size: 10px;
-          font-family: sans-serif;
-      }
+.text-label {
+    font-size: 10px;
+    font-family: sans-serif;
+}
 
-      .dot {
-          stroke: #293b47;
-          fill: #7A99AC
-      }
-      </style>
-     </head >
-    <body>
+.dot {
+    stroke: #293b47;
+    fill: #7A99AC
+}
+</style>
+</head>
+
+<body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
     <script>
     var margin = {
@@ -50,18 +51,13 @@
     var yScale = d3.scale.linear()
         .range([0, height]);
 
-    var formatAsCurrency = d3.format("$");
-
-
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom");
-    xAxis.tickFormat(formatAsCurrency);
 
     var yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left");
-    yAxis.tickFormat(formatAsCurrency);
 
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -74,6 +70,7 @@
       //at this point i need to generate yhat for the regression
       var n = data.length;
 
+      //orig code
       var x = [];
       var y = [];
       var x_mean = 0;
@@ -128,35 +125,21 @@
       yScale.domain([d3.max(data, function(d) { return d.x; }), 0]);
 
 
-      dataset.forEach(function(d) {
-          d.x = +d.x;
-          d.y = +d.y;
-          d.yhat = +d.yhat;
-      });
+        dataset.forEach(function(d) {
+            d.x = +d.x;
+            d.y = +d.y;
+            d.yhat = +d.yhat;
+        });
 
-      var line = d3.svg.line()
-          .x(function(d) {
-              return xScale(d.x);
-          })
-          .y(function(d) {
-              return yScale(d.yhat);
-          });
-
-      var yval = dataset.map(function (d) { return d.x; });
-      var xval = dataset.map(function (d) { return d.y; });
+        var line = d3.svg.line()
+            .x(function(d) {
+                return xScale(d.x);
+            })
+            .y(function(d) {
+                return yScale(d.yhat);
+            });
 
 
-      var lr = linearRegression(yval,xval);
-
-      var xmax = d3.max(dataset, function (d) { return d.x; });
-      var ymax = d3.max(dataset, function (d) { return d.y; });
-      var myLine = svg.append("svg:line")
-            .attr("x1", xScale(0))
-            .attr("y1", yScale(lr.intercept))
-            .attr("x2", xScale(xmax))
-            .attr("y2", yScale( (ymax * lr.slope) + lr.intercept - 700))
-            .style("stroke", "red")
-            .style("stroke-width", "2");
 
         svg.append("g")
             .attr("class", "x axis")
@@ -167,7 +150,7 @@
             .attr("x", width)
             .attr("y", -6)
             .style("text-anchor", "end")
-            .text("Average Monthly Income");
+            .text("X-Value");
 
         svg.append("g")
             .attr("class", "y axis")
@@ -178,7 +161,7 @@
             .attr("y", 6)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Median Monthly Income")
+            .text("Y-Value")
 
         svg.selectAll(".dot")
             .data(dataset)
@@ -197,40 +180,6 @@
             .attr("class", "line")
             .attr("d", line);
           });
-
-          svg.append("text")
-  			    .attr("class", "x label")
-  			    .attr("text-anchor", "end")
-  			    .attr("x", width / 1.4)
-  			    .attr("y", 20)
-  			    .text("Average Vs. Median Monthly Income by Education, 2009");
-
-          function linearRegression(y,x){
-
-            var lr = {};
-            var n = y.length;
-            var sum_x = 0;
-            var sum_y = 0;
-            var sum_xy = 0;
-            var sum_xx = 0;
-            var sum_yy = 0;
-
-            for (var i = 0; i < y.length; i++) {
-
-                sum_x += x[i];
-                sum_y += y[i];
-                sum_xy += (x[i]*y[i]);
-                sum_xx += (x[i]*x[i]);
-                sum_yy += (y[i]*y[i]);
-            }
-
-            lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
-            lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
-            lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
-
-            return lr;
-
-  };
 
     </script>
 </body>
