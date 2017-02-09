@@ -1,4 +1,15 @@
+This chart shows the relationship between the highest level of education a person has completed and his average monthly income. Higher bars intuitively indicate higher income. The bars are simple but effectively show the correlation of higher education to higher income. The different levels of education are labeled at the bottom. 
+
 There is a clear correlation between income and higher degrees. Strangely, those whose highest level of education was a doctorate have less income than those with professional degrees. This could be due to the high salaries of doctors and lawyers who earn these professional degrees. It could also indicate that in the midst of the recession (2009) there was less demand for academics, and per supply-and-demand, their income decreased.
 
 Mean: 3872.6
 Standard deviation: 2672.33
+
+
+References
+
+Bar Chart. Mike Bostock, 2017, https://bl.ocks.org/mbostock/3885304
+
+Simple bar graph in v4. d3noob, 2016, https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+
+Making a bar chart. Scott Murray, 2015, http://alignedleft.com/tutorials/d3/making-a-bar-chart

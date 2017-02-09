@@ -1,5 +1,15 @@
+This chart shows the relationship between the highest level of education a person has completed and his average median income. Once again, higher bars intuitively indicate higher income. Since the data is very similar to table_2a, keeping the format the same allows the user to see the correlation between the median income and the average income.
+
 As in table_2a, there is a clear correlation between education and income. However, there is less of a gap between the median income for professional degrees and doctorate degrees as there is between the average income. This could indicate that there are more outliers with professional degrees than with masters degrees. Also note how median income is lower than average income. This is likely due to high-income outliers.
 
 Mean: 2869.1
 Standard deviation: 1853.99
 
+
+References
+
+Bar Chart. Mike Bostock, 2017, https://bl.ocks.org/mbostock/3885304
+
+Simple bar graph in v4. d3noob, 2016, https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+
+Making a bar chart. Scott Murray, 2015, http://alignedleft.com/tutorials/d3/making-a-bar-chart
