@@ -30,9 +30,8 @@
 			var yScale = d3.scaleLinear()
 				  .range([height, 0]);
 
-			//Append an svg object to the body of the page
-			//Append a 'group' element to 'svg'
-			//Moves the 'group' element to the top left margin
+			//Add an svg element to the page
+			//Move a group element to the top left margin
 			var svg = d3.select("body").append("svg")
 			    .attr("width", width + margin.left + margin.right)
 			    .attr("height", height + margin.top + margin.bottom)
@@ -44,7 +43,7 @@
 			d3.csv("table2j_edu_income.csv", function(error, data) {
 			  if (error) throw error;
 
-			  // format the data
+			  //Format the data
 			  data.forEach(function(d) {
 			    d.income = +d.income;
 			  });
@@ -53,7 +52,7 @@
 			  xScale.domain(data.map(function(d) { return d.education; }));
 			  yScale.domain([0, d3.max(data, function(d) { return d.income; })]);
 
-			  //Append the rectangles for the bar chart
+			  //Bind the data to the bars
 			  svg.selectAll(".bar")
 			      .data(data)
 			    .enter().append("rect")
